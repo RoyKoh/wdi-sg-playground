@@ -1,0 +1,67 @@
+
+/*Class Background Colour*/
+
+div {
+  border: 3px dotted plum;
+}
+
+li {
+  border-top: 3px solid seagreen;
+}
+
+.Mammals{
+  background: lavenderblush;
+  font-weight: bold;
+}
+
+.Birds{
+  background: lightgrey;
+  font-style: italic;
+}
+
+.Fish{
+  background: lightyellow;
+  text-decoration: underline;
+}
+
+/* Animal names Colours */
+
+li#mouse {
+  color: gray
+}
+
+li#canary {
+  color: orangered
+}
+
+li#penguin {
+  color: black
+}
+
+li#salmon {
+  color: salmon
+}
+
+li#cat {
+  color: sienna
+}
+
+li#goldfish {
+  color: gold
+}
+
+li#dog {
+  color: tan
+}
+
+li#sheep {
+  color: steelblue
+}
+
+li#parakeet {
+  color: lime
+}
+
+li#tuna {
+  color: purple
+}
