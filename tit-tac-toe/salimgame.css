@@ -1,0 +1,28 @@
+body {
+  background: lavender;
+
+}
+.status-bar {
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.tile {
+  height: 180px;
+  width: 180px;
+  border: 10px solid black;
+  margin: 2px;
+  font-size: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hidden {
+  display: none;
+}
