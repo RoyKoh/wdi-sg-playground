@@ -1,0 +1,11 @@
+body {
+      text-align: center;
+      background: url("file:///Users/kohchengchuan/wdi-sg-playground/project1/image/background3.jpeg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      height:100%;
+      width:100%;
+      color: white;
+      font-family: helvetica;
+    }
+.tab { margin-left: 40px; }
