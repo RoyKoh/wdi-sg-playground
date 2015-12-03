@@ -1,0 +1,15 @@
+var path = require('path')                ok
+var express = require('express')          ok
+var app = express()                       ok
+
+// initialize
+var PORT = process.argv[2]                ok
+var VIEWS_PATH = process.argv[3]         *** VIEWS_PATH used only in viewing template engines
+app.set('views', VIEWS_PATH || path.join(__dirname, 'templates'))  *** set view path under folder templates
+app.set('view engine', 'jade')           *** set jade view engine
+
+// lets go
+app.use('/home', function (req, res) {   *** use app through /home directory, serve request, send response
+  res.render('index', {date: new Date().toDateString()})   *** response render through an index convert new date to string
+})
+app.listen(PORT)  *** app ready to listen to request and will set arbitrary port.

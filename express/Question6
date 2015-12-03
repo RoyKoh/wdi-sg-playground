@@ -1,0 +1,16 @@
+ANSWER
+// requires
+	var express = require('express');       ok
+
+
+	// initialize
+	var PORT = process.argv[2];             ok
+	var app = express();                    ok
+
+
+	// lets go
+	app.get('/search', function(req, res){     ***   app get to /search directory with query and return response
+                                                    through json object represented by req.query in res.send
+	    res.send(req.query)                    ***   send json object
+	});
+	app.listen(PORT);                          ***   readies port for requests.

@@ -1,0 +1,25 @@
+
+// requires
+	var express = require('express');                        ok
+	var crypto = require('crypto');                          ok
+
+
+	// initialize
+	var PORT = process.argv[2];    *** init port ok
+	var app = express();           *** define express app ok
+
+
+	// lets go
+	app.put('/message/:id', function(req, res){    *** receive update request msg and ID, throw for response
+	    console.log(req.params.id);                *** console log to screen through html web required params after crypto.
+
+	    res.end(                                   *** why res.end?  what is the function of .end?
+	        crypto.
+	        createHash('sha1').                    *** create HASH
+	        update(new Date().toDateString() + req.params.id).  *** data string it, update req.params to date strings
+	        digest('hex')                          *** what is digest('hex')
+	    );
+	});
+
+
+	app.listen(PORT);   *** readies port to receive requests. ok

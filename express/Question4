@@ -1,0 +1,33 @@
+ANSWER
+INDEX.JS
+// requires
+	var express = require('express');        ok
+	var path = require('path');              ok
+	var stylus = require('stylus');          ok
+	var app = express();                     ok
+
+
+	// lets go
+	app.use(stylus.middleware(path.join(__dirname, 'public')));      *** use stylus middleware using absolute path under public directory
+	app.use(express.static(process.argv[3] || path.join(__dirname, 'public'))); *** use express to serve static file under absolute path under public directory
+	app.listen(process.argv[2]);   *** app to listen for request on port number, return port number
+
+\public\index.html  ok
+<html> ok
+	      <head>  ok
+	        <title>expressworks</title> ok
+	        <link rel="stylesheet" type="text/css" href="/main.css"/> *** QUESTION : will .styl create main.css or we have to create ourselves?
+	      </head> ok
+	      <body> ok
+	        <p>I am red!</p> ok
+	      </body> ok
+	    </html> ok
+
+\public\main.css ** we create or .styl create for us.
+p { ok
+	  color: #f00; ok
+	} ok
+
+\public\main.styl ok
+p ok
+	    color red ok

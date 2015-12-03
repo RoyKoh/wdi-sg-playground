@@ -1,0 +1,20 @@
+var express = require('express')
+//get express module
+var path = require('path')
+//get path module
+var app = express()
+//define express as an app
+app.use(express.static(process.argv[3] || path.join(__dirname, 'public')))
+//use app via express to serve static files ** Could you explain the remaining syntax?
+var server = app.listen(process.argv[2], function () {
+//on command node ****.js initiate server, app wait for req and perform {} command lines ** process.argv[2] refers to?
+  var host = server.address().address
+//define host server address, since it is (), does it refer to localhost by default? url 168.192.1.1
+  var port = server.address().port
+//define host server port, arbitrarily provided.
+  console.log('Example app listening at http://%s:%s', host, port)
+})
+//log on screen local drive and the arbitrary port name.
+
+//This js passed the test but when i tried through browser localhost:port number the js
+//should serve me the index.html but did not, is there any error in the codes? 

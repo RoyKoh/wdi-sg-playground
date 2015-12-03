@@ -1,0 +1,21 @@
+// requires
+	var express = require('express');                      ok
+	var stylus = require('stylus');                        ok
+	var bodyParser = require('body-parser');               ok
+	var app = express();                                   ok
+
+
+	// initialize
+	var PORT = process.argv[2];                            ok
+	app.use(bodyParser.urlencoded({extended: false}));     ok
+
+
+
+
+	// lets go
+	app.post('/form', function(req, res){                     *** app post form to /form, wait req, return response for {}
+	    res.end(req.body.str.split('').reverse().join(''));   *** request received body parse string to split and reverse
+                                                                and join, QUESTION, why need the response.end?
+	});
+	app.listen(PORT);   **** activate app to listen to port for request, return port number
+  
