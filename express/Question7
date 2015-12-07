@@ -1,0 +1,42 @@
+ANSWER
+fileutils.js
+// requires
+	var fs = require('fs');                            *** require file system
+
+
+	module.exports = {                                 *** function module readfile asyncronous
+	    readFile: function(file, callback){
+	        fs.readFile(file, function(err, data){
+	            if(err)
+	                callback(err);
+	            else
+	                callback(null, data);
+	        });
+	    }
+	}
+
+index.js
+// requires
+	var express = require('express');                      *** require express ok
+	var fileUtils = require('./fileUtils');                *** require in /fileUtils ok
+
+
+	// initialize
+	var PORT = process.argv[2];                            *** init port ok
+	var FILENAME = process.argv[3] || 'sample.txt';        *** define the file name in use, in this case sample.txt to be located in /books
+	var app = express();                                   *** define app as express server ok
+
+
+	// lets go
+	app.all('/books', function(req, res){                  *** app.all ? '/books' means located in /books directory, the rest of line ok
+	    fileUtils.readFile(FILENAME, function(err, data){  *** call fileUtils.js to readFIle asyncronously and
+	        if(err)                                        *** respond with parse json err or data.
+	            res.send(JSON.parse(err));
+	        else
+	            res.send(JSON.parse(data));
+	    });
+	});
+	app.listen(PORT);    *** ready port to receive requests.
+
+sample.txt
+[{"title":"Express.js Guide","tags":["node.js","express.js"],"url":"http://expressjsguide.com"},{"title":"Rapid Prototyping with JS","tags":["backbone.js","node.js","mongodb"],"url":"http://rpjs.co"},{"title":"JavaScript: The Good Parts","tags":["javascript"]}]
