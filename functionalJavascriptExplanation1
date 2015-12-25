@@ -1,0 +1,347 @@
+FUNCTIONAL
+JAVASCRIPT Higher Order Functions
+Exercise Enquiries
+
+Could you please help to explain how these lines work?
+ANSWER
+function getShortMessages(messages)
+{
+return messages.filter(function(m)
+{
+return m.message.length < 50;
+}).map(function(m) {
+return m.message;
+});
+}
+module.exports =
+getShortMessages;
+OFFICIAL ANSWER
+module.exports = function
+getShortMessages(messages) {
+  return messages.filter(function(item)
+{
+    return item.message.length <
+50
+}).map(function(item) {
+    return item.message
+  })
+}
+.....................................................................................
+Could you please help to explain how these lines work?
+ANSWER
+module.exports = function
+checkUsersValid(goodUsers) {
+return function(submittedUsers)
+{
+return
+submittedUsers.every(function(a) {
+return goodUsers.some(function(b)
+{
+return a.id === b.id;
+})
+})
+}
+}
+OFFICIAL ANSWER
+module.exports = function
+checkUsersValid(goodUsers) {
+  return function allUsersValid(submittedUsers)
+{
+    return
+submittedUsers.every(function(submittedUser)
+      return
+goodUsers.some(function(goodUser) {
+        return goodUser.id ===
+submittedUser.id
+      })
+    })
+  }
+}
+.....................................................................................
+ANSWER
+module.exports = function(inputWords)
+{
+return   why is a return required here?
+inputWords.reduce(function(counts, word) {   ??
+counts[word] = counts[word] ||  0;  ??
+counts[word]++;  means the function inputWords go through each input arguments one by one and process?
+return counts; return counts as a number into an array or an object?
+}, {});
+}
+OFFICIAL ANSWER
+function countWords(arr) { this means when i call the function, i will type countWords(arr) ... the arr means arrays right?  meaning i will be inputting the array of words including some with repetition in it for the function to count.
+  return arr.reduce(function(countMap, word) ??
+{
+    countMap[word] = ++countMap[word] || 1 ??
+// increment or initialize to 1
+    return countMap why return initialize to 1 and not zero?
+  }, {}) // second argument to reduce initialises countMap to {}
+}
+module.exports = countWords
+...................................................................................
+ANSWER
+var orignalArr, index = 0;  with declaring a var with array and a comma index = 0, what is set
+function reduce(arr, fn, initial) here we are declaring a function reduce with 3 arguments.
+{
+if (!arr.length) return initial; if any in the array through iteration has length zero, return to initial argument
+if (!orignalArr) orignalArr = arr; ??
+var head = arr[0]; set the first item in the array arr to variable head
+var tail = arr.slice(1); ??
+initial = fn(initial, head, index++, orignalArr); ??
+return reduce(tail, fn, initial);
+}
+module.exports = reduce;
+OFFICIAL ANSWER
+Could you please help to explain how these lines work?
+function reduce(arr, fn, initial) {
+  return (function reduceOne(index, value)
+{
+    if (index > arr.length - 1) return
+value // end condition
+    return reduceOne(index + 1, fn(value,
+arr[index], index, arr)) // calculate & pass values to
+next step
+  })(0, initial) // IIFE. kick off recursion
+with initial values
+}
+module.exports = reduce
+....................................................................................
+Call ??
+JavaScript implements 'duck'
+typing. Duck typing is a style of dynamic typing in which an
+object's methods ?? and properties (those that shows up when we do the inspect properties in Chrome right?)  determine the valid semantics, rather than its inheritance?? from a particular class?? or implementation of a specific interface??.
+In JavaScript, in order to write robust programs we sometimes need to check an object conforms to the type that we need. why? We can use Object#hasOwnProperty to detect if an object 'has' a property defined on itself (i.e. not inherited from its prototype): ??
+ANSWER 8
+function duckCount() { ok
+var count = 0; ok
+for (var i = 0, l = arguments.length; i < l; ++i) { ??
+var obj = arguments[i];
+if (Object.prototype.hasOwnProperty.call(obj, 'quack')) ??
+count++; why count++
+}
+return count;
+}
+module.exports = duckCount
+OFFICIAL ANSWER
+Could you please help to explain how these lines work?
+function duckCount() {
+return
+Array.prototype.slice.call(arguments).filter(function(obj)
+{
+return
+Object.prototype.hasOwnProperty.call(obj, 'quack')
+  }).length
+}
+module.exports = duckCount
+....................................................................................
+Could you please help to explain how these lines work?
+ANSWER 9
+var slice = Array.prototype.slice
+function logger(namespace) {
+return function() {
+var messages = slice.apply(arguments);
+console.log.apply (this,
+[namespace].concat(messages));
+}
+}
+module.exports = logger
+OFFICIAL ANSWER
+ var slice = Array.prototype.slice
+function logger(namespace) {
+  return function() {
+    console.log.apply (console,
+[namespace].concat(slice.call(arguments)))
+  }
+}
+module.exports = logger
+.....................................................................................
+Partial
+Application with Bind
+ Exercise
+10 of 18
+# Task
+Use
+Function#bind to implement a logging function that allows you to namespace?? messages.
+Your implementation should take a namespace string??, and return a function that prints messages to the console with the namespace prepended.
+Make sure all arguments passed to the returned logging function are printed. Print
+the output to the console directly.
+namespace: a String to prepend to each message passed to the  returned function.??
+Could you please help to explain how these lines work?
+var info = logger('INFO:')
+info('this is an info message')
+// INFO: this is an info message
+var warn = logger('WARN:')
+warn('this is a warning message', 'with more info')
+// WARN: this is a warning message with more info
+ANSWER
+ANS 10
+module.exports = function(namespace)
+{
+return
+console.log.bind(this, namespace);
+}
+OFFICIAL ANSWER
+module.exports = function(namespace) {
+return console.log.bind(console, namespace)
+}
+.....................................................................................
+Could you please help to explain how these lines work?
+Implement Map with Reduce
+Exercise 11 of 18
+ANSWER 11
+module.exports = function
+arrayMap(arr, fn) {
+return arr.reduce(function(mapped, item, index,
+array) {
+     mapped.push(fn(item,
+index, array))
+     return
+mapped
+   },
+[])
+ }
+OFFICIAL ANSWER
+module.exports = function map(arr, fn,
+thisArg) {
+  return arr.reduce(function(acc, item, index,
+arr) {
+    acc.push(fn.call(thisArg, item, index,
+arr))
+    return acc
+  }, [])
+}
+.....................................................................................
+Could you please help to explain how these lines work?
+Exercise 12 of 18
+Spies - Override a specified method of an object with new functionality while still maintaining all of the old behaviour. Create a spy that keeps track of how many times a function is called.
+## Example??
+var spy = Spy(console, 'error')
+console.error('calling console.error')
+console.error('calling console.error')
+console.error('calling console.error')
+console.log(spy.count) // 3
+## Arguments
+
+  * target: an object containing the method `method` ?
+  *method: a string with the name of the method on `target` to spy on. ?
+ANSWER
+function Spy(target, method) {
+var counter = { count: 0 };
+var oldMethod = target[method];
+target[method] = function() {
+counter.count++;
+return
+oldMethod.apply(target, arguments);
+};
+return counter;
+}
+module.exports = Spy
+OFFICIAL ANSWER
+function Spy(target, method) {
+var originalFunction = target[method]
+// use an object so we can pass by reference, not value
+// i.e. we can return result, but update count from this scope
+var result = {
+count: 0
+}
+// replace method with spy method
+target[method] = function() {
+result.count++
+// track function was called
+return originalFunction.apply(this, arguments)
+// invoke original function
+}
+return result
+}
+module.exports = Spy
+....................................................................................
+Blocking Event Loop
+Exercise 13 of 18
+# Task
+Modify the recursive repeat function provided in the boilerplate, such that it does not block the event loop (i.e. Timers and IO handlers can fire).  This necessarily requires repeat to be asynchronous. A timeout is queued to fire after 100 milliseconds, which will print the results of the test and exit the process. repeat should release control of the event loop to allow the timeout to interrupt before all of the operations complete. Try to perform as many operations as you can before the timeout fires!????
+## Conditions
+* Do not use any for/while loops or Array#forEach.
+* Do not create any unecessary functions e.g helpers.
+ANSWER
+function repeat(operation, num) {
+if (num <= 0) return operation() meaning if num equal or smaller than 0, stop the operation() right?
+if (num % 100 === 0) setTimeout(repeat.bind(this, operation, num--), 1) ??
+else
+repeat(operation, num--)num-- means what??
+}
+module.exports = repeat
+OFFICIAL ANSWER
+function repeat(operation, num) {
+if (num <= 0) return operation()
+// release control every 10 or so iterations.
+// 10 is arbitrary.
+if (num % 10 === 0) {
+setTimeout(function() { ??
+repeat(operation, --num) ??
+})
+} else {
+repeat(operation, --num)
+}}
+module.exports = repeat .............................................................................
+Could you please help to explain how these lines work?
+Trampoline
+Exercise 14 of 18
+The boilerplate includes a definition of repeat. repeat will take a Function operation, and  a Number num, and invoke operation num times:
+var count = 0
+repeat(function() {
+count++
+ }, 100)
+console.log('executed %d times.', count) ??
+// => executed 100 times.
+BUT note that executing repeat with a large num causes a stack overflow:
+var count = 0
+repeat(function() {
+count++
+}, 100000)
+console.log('executed %d times', count)
+// => RangeError: Maximum call stack size exceeded
+# Task
+Modify the boilerplate below such that it uses a trampoline to continuously call itself synchronously. You can assume that the operation passed to repeat does not take arguments (or they are already bound to the function) and the return value is not important.
+ANSWER
+function repeat(operation, num) {
+var _repeat = trampoline(function mySelf(operation, num) {
+if (num <= 0) return;
+return function() {
+operation();
+return
+mySelf(operation, --num);
+}
+});
+return _repeat(operation, num);
+}
+function trampoline(fn)
+{
+return function()
+{
+var repeat = fn.apply(fn, arguments);
+while (repeat instanceof Function)
+repeat = repeat();
+return repeat;
+}
+}
+module.exports = function(operation, num) {
+return repeat(operation, num);
+}
+OFFICIAL ANSWER
+function repeat(operation, num) {
+return function() {
+if (num <= 0) return operation()
+return repeat(operation, --num)
+}
+}
+function trampoline(fn) {
+while(fn && typeof fn === 'function') {
+fn = fn()
+}
+}
+module.exports = function(operation, num)
+{
+trampoline(function() {
+return repeat(operation, num)
+})
+}
